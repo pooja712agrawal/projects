@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="./css/event.css">
+<script src="./js/event.js"></script>
+</head>
+<body>
+
+
+<!--------NavBar-------->
+<ul>
+  <button onclick="myHome()" class="button_css">Home</button>
+  <button onclick="myEventList()" class="button_css" style="visibility: visible;" id="myEvents">My Events</button>
+  <button onclick="logout()" class="button_css" style="margin-left: 79%;">Logout</button>
+</ul>
+
+
+<!--------Home Page-------->
+<div id="home" style="display:block;">
+
+		<h1>Public Events</h1>
+		
+		<span>
+		<label for="event" class="dropdown_label">Event Type</label>
+
+         <select class="dropdown_select" id="eventSelect">
+          <option value="All" selected="selected">All</option>
+          <option value="Sports">Sports</option>
+          <option value="Academic">Academic</option>
+          <option value="Celebration">Celebration</option>
+		  <option value="Cultural">Cultural</option>
+        </select>
+		</span>
+		<button onclick="filterEvents()" class="filter_btn">Filter</button>
+		<span>
+		<button onclick="eventCreate()" class="create_btn" style="visibility: visible;" id="createbtn">Create Event</button>
+		</span>
+		
+		
+		<p id="demo" class="listClass"></p>
+	
+</div>
+
+<!--------Contact us Page-------->
+<div id="contact" style="display:none">
+<div style="text-align: center;margin-top: 15px;font-weight: 600;">My Events</div>
+<p id="myevent" class="listClass"></p>
+</div>
+
+
+<!--------Create Event Page-------->
+<div id="create" style="display:none">
+<div class="text-center">
+<div class="heading1 disp-inline"> Choose an event type</div>
+<div class="heading-description text-center"> Get started with a predefined template for the event you wish to create. You can always customize it later!</div>
+<div class="heading-underline float-center">
+</div>
+</div>
+
+
+<div class="launcher-details-wrapper">
+
+ <!--------Create Sport Event-------->
+
+<div class="launcher-details">
+<div class="pp-panel initiative-details ">
+<div class="pp-panel-body launcher-wrapper float-center">
+<div class="launcher-body">
+<div class="launcher-title text-center margin-bottom-5 ng-binding">Sports</div>
+<div class="launcher-description text-center">
+<p>Create sports events like Cricket matches,Badminton matches etc. Manage your event and keep your players up to date on the sports updates.</p>
+</div>
+</div>
+<div class="launcher-footer-wrapper">
+<div class="launcher-footer float-center">
+ <div class="pull-right btn-create-wrapper">
+ <button class="btn-create-event" onclick="createNewEvent(1)"> Create Event</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ <!--------Create Academic Event-------->
+ <div class="launcher-details" style="margin-left: 53%;margin-top: -17.2%;">
+<div class="pp-panel initiative-details">
+<div class="pp-panel-body launcher-wrapper float-center">
+<div class="launcher-body">
+<div class="launcher-title text-center margin-bottom-5 ng-binding">Academic</div>
+<div class="launcher-description text-center">
+<p>Create learning events like trainings sessions, knowledge transfer sessions, inductions session etc. Manage your event and keep your participants up to date on the training updates.
+</p></div>
+</div>
+<div class="launcher-footer-wrapper">
+<div class="launcher-footer float-center">
+ <div class="pull-right btn-create-wrapper">
+ <button class="btn-create-event" onclick="createNewEvent(2)"> Create Event</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+  <!--------Create Celebration Event-------->
+ <div class="launcher-details">
+<div class="pp-panel initiative-details">
+<div class="pp-panel-body launcher-wrapper float-center">
+<div class="launcher-body">
+<div class="launcher-title text-center margin-bottom-5 ng-binding">Celebration</div>
+<div class="launcher-description text-center">
+<p>Be it a birthday party, festival or special days like Earth day, women's day etc. plan and celebrate them by adding a little lively fun into the mix.</p>
+</div>
+</div>
+<div class="launcher-footer-wrapper">
+<div class="launcher-footer float-center">
+ <div class="pull-right btn-create-wrapper">
+ <button class="btn-create-event" onclick="createNewEvent(3)"> Create Event</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+  <!--------Create Cultural Event-------->
+ <div class="launcher-details"  style="margin-left: 53%;margin-top: -17.2%;">
+<div class="pp-panel initiative-details ">
+<div class="pp-panel-body launcher-wrapper float-center">
+<div class="launcher-body">
+<div class="launcher-title text-center margin-bottom-5 ng-binding">Cultural</div>
+<div class="launcher-description text-center">
+<p>Create Cultural event like Diwali celebration, Holi Celebration. Enjoy Cultural days with your friends and Family.</p></div>
+</div>
+<div class="launcher-footer-wrapper">
+<div class="launcher-footer float-center">
+ <div class="pull-right btn-create-wrapper">
+ <button class="btn-create-event"  onclick="createNewEvent(4)"> Create Event</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+</div>
+</div>
+
+
+<!---------Modal------->
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+	<form name="myForm" action="" onsubmit="return submitEvent(this)" method="post" class="form-back">
+	<div style="margin-bottom: 10px;">Event Type : <input type="text"  name="eventtype" class="form-input" style="margin-left: 23px;" disabled></div>
+      <div style="margin-bottom: 10px;">Event Title <span style="color:red">*</span> : <input type="text"  name="eventtitle" class="form-input"></div>
+	  <div style="margin-bottom: 10px;">Start Date <span style="color:red">*</span> : <input type="text" name="startdate" class="form-input" placeholder="dd/mm/yyyy" style="margin-left: 18px;"></div>
+	  <div style="margin-bottom: 10px;">End Date <span style="color:red">*</span> : <input type="text" name="enddate" class="form-input" placeholder="dd/mm/yyyy" style="margin-left: 23px;"></div>
+	  <div style="margin-bottom: 10px;">Location <span style="color:red">*</span> : <input type="text" name="loc" class="form-input" style="margin-left: 26px;"></div>
+      <input type="submit" value="Submit" class="form-btn">
+    </form>
+  </div>
+
+</div>
+
+
+<!----Book Ticket Modal content ---->
+<div id="bookModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="book-modal-content">
+    <span class="close" onclick="closeBookModal()">&times;</span>
+	<div style="margin-left: 28%;">
+	<div style="font-size: 25px;"> Ticket booked successfully </div>
+	<button onclick="closeBookModal()" class="book-modal-btn"> OK</button>
+	</div>
+  </div>
+
+</div>
+
+</body>
+</html>
